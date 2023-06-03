@@ -1,7 +1,6 @@
 import {
   Body,
   Controller,
-  Res,
   Get,
   Post,
   Request,
@@ -16,6 +15,13 @@ import { AuthGuard } from './auth.guard';
 @Controller()
 export class AuthController {
   constructor(private authService: AuthService) {}
+
+  @Post('login')
+  postLogin(@Body() formData: any) {
+    console.log(formData);
+    this.authService.validateUser(formData.email, formData.password);
+    return 'coucou';
+  }
 
   @Get('login')
   @Render('login')
